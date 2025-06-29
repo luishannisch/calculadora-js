@@ -1,0 +1,109 @@
+/* 1. Variáveis para manter o tema consistente */
+:root {
+  --bg-page:    #fafafa;
+  --bg-calc:    #ffffff;
+  --bg-display: #222222;
+  --fg-display: #ffffff;
+  --btn-bg:     #e0e0e0;
+  --btn-hover:  #d5d5d5;
+  --btn-fg:     #000000;
+  --primary:    #4caf50;   /* = */
+  --danger:     #f44336;   /* C */
+  --gap:        10px;
+  --radius:     8px;
+  --btn-size:   min(60px, 20vw);
+}
+
+/* 2. Reset e corpo da página */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-page);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* 3. Container da calculadora */
+.calculator {
+  background: var(--bg-calc);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  padding: 20px;
+  width: 360px;         /* largura fixa para manter proporção */
+  max-width: 90%;       /* responsivo em telas pequenas */
+}
+
+/* 4. Visor */
+.display {
+  width: 100%;
+  height: 64px;
+  margin-bottom: var(--gap);
+  padding: 0 16px;
+  font-size: 2rem;
+  text-align: right;
+  background: var(--bg-display);
+  color: var(--fg-display);
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* 5. Grid de botões */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: var(--btn-size);
+  gap: var(--gap);
+}
+
+/* 6. Botões gerais */
+.buttons button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.05), -2px -2px 6px rgba(255,255,255,0.7);
+}
+.buttons button:hover {
+  background: var(--btn-hover);
+}
+.buttons button:active {
+  transform: translateY(2px);
+  box-shadow: inset 2px 2px 6px rgba(0,0,0,0.1);
+}
+
+/* 7. Destaques de cor */
+button[data-action="equals"] {
+  grid-column: span 2;            /* ocupa 2 colunas */
+  background: var(--primary);
+  color: #fff;
+}
+button[data-action="clear"] {
+  background: var(--danger);
+  color: #fff;
+}
+
+/* 9. Acessibilidade: foco visível */
+.buttons button:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* 10. Responsividade extra */
+@media (max-width: 400px) {
+  .display { height: 50px; font-size: 1.6rem; }
+  .buttons { grid-auto-rows: min(50px, 20vw); }
+  .buttons button { font-size: 1.2rem; }
+}
